@@ -9,6 +9,7 @@ import { useState, useEffect, useCallback } from "react";
 import { Header } from "./components/Layout/Header";
 import { Sidebar } from "./components/Layout/Sidebar";
 import { ChatContainer } from "./components/Chat/ChatContainer";
+import { LoginScreen } from "./components/Login/LoginScreen";
 import { useChat } from "./hooks/useChat";
 import { useDocuments } from "./hooks/useDocuments";
 import { checkHealth } from "./services/api";
@@ -17,6 +18,9 @@ import "./App.css";
 function App() {
   const [isConnected, setIsConnected] = useState(false);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [user, setUser] = useState<string | null>(() =>
+    sessionStorage.getItem("hb_user")
+  );
 
   const { messages, isLoading, sendMessage, clearChat } = useChat();
   const {
@@ -60,6 +64,16 @@ function App() {
   const closeSidebar = useCallback(() => {
     setIsSidebarOpen(false);
   }, []);
+
+  const handleLogin = useCallback((username: string) => {
+    sessionStorage.setItem("hb_user", username);
+    setUser(username);
+  }, []);
+
+  // Show login screen if not authenticated
+  if (!user) {
+    return <LoginScreen onLogin={handleLogin} />;
+  }
 
   return (
     <div className="app" dir="rtl">

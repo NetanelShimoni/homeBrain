@@ -12,6 +12,16 @@ const api = axios.create({
   timeout: 60000, // 60s timeout for LLM calls
 });
 
+// --- Auth APIs ---
+
+export async function login(
+  username: string,
+  password: string
+): Promise<{ success: boolean; user: { username: string } }> {
+  const { data } = await api.post("/auth/login", { username, password });
+  return data;
+}
+
 // --- Document APIs ---
 
 export interface UploadResult {

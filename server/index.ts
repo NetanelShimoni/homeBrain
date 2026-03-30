@@ -29,6 +29,18 @@ app.use("/api/documents", documentRoutes);
 app.use("/api/ai", aiRoutes);
 app.use("/api/manuals", manualRoutes);
 
+// ── Login endpoint (hardcoded credentials) ─────────────────────
+const VALID_USER = { username: "שמעוני", password: "שמעוני" };
+
+app.post("/api/auth/login", (req, res) => {
+  const { username, password } = req.body;
+  if (username === VALID_USER.username && password === VALID_USER.password) {
+    res.json({ success: true, user: { username } });
+  } else {
+    res.status(401).json({ success: false, error: "שם משתמש או סיסמה שגויים" });
+  }
+});
+
 // Simple health check (for Render / uptime monitors)
 app.get("/healthz", (_req, res) => {
   res.status(200).send("OK");
