@@ -1,0 +1,17 @@
+services:
+  - type: web
+    name: homebrain-api
+    runtime: node
+    repo: https://github.com/NetanelShimoni/homeBrain.git
+    branch: main
+    buildCommand: npm install && npm run build:server
+    startCommand: npm run start:server
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: "10000"
+      - key: GROQ_MODEL
+        value: llama-3.3-70b-versatile
+      - key: GROQ_API_KEY
+        sync: false # must be set manually in Render dashboard
