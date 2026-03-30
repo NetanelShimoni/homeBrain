@@ -1021,8 +1021,8 @@
 .more-menu-dropdown {
   position: absolute;
   bottom: calc(100% + 6px);
-  right: 0;
-  left: auto;
+  left: 0;
+  right: auto;
   background: var(--bg-card);
   border: 1px solid var(--border);
   border-radius: var(--radius-md);
@@ -1420,8 +1420,8 @@
   }
 
   .more-menu-dropdown {
-    left: auto;
-    right: 0;
+    left: 0;
+    right: auto;
     min-width: 170px;
   }
 
