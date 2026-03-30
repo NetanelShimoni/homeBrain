@@ -1004,6 +1004,131 @@
   cursor: not-allowed;
 }
 
+/* ── 3-dot more menu ───────────────────────────────────────── */
+
+.more-menu-wrapper {
+  position: relative;
+}
+
+.btn-more {
+  font-size: 1.3rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  line-height: 1;
+}
+
+.more-menu-dropdown {
+  position: absolute;
+  bottom: calc(100% + 6px);
+  left: 0;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-lg);
+  min-width: 180px;
+  z-index: 50;
+  overflow: hidden;
+  animation: fadeIn 0.12s ease;
+}
+
+.more-menu-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  width: 100%;
+  padding: 0.6rem 0.85rem;
+  border: none;
+  background: none;
+  font-size: 0.85rem;
+  color: var(--text-primary);
+  cursor: pointer;
+  transition: background 0.1s;
+  direction: rtl;
+  text-align: right;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.more-menu-item:hover:not(:disabled) {
+  background: rgba(79, 70, 229, 0.08);
+}
+
+.more-menu-item:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.more-menu-item.recording {
+  background: rgba(239, 68, 68, 0.08);
+  color: #ef4444;
+}
+
+.more-menu-icon {
+  font-size: 1rem;
+  flex-shrink: 0;
+  width: 22px;
+  text-align: center;
+}
+
+/* ── Markdown rendering in AI messages ─────────────────────── */
+
+.md-content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.md-content .md-p {
+  margin: 0;
+  line-height: 1.7;
+}
+
+.md-content .md-h1 {
+  font-size: 1.15rem;
+  font-weight: 700;
+  margin: 0.5rem 0 0.2rem;
+  color: var(--text-primary);
+}
+
+.md-content .md-h2 {
+  font-size: 1.05rem;
+  font-weight: 700;
+  margin: 0.4rem 0 0.15rem;
+  color: var(--text-primary);
+}
+
+.md-content .md-h3 {
+  font-size: 0.95rem;
+  font-weight: 600;
+  margin: 0.3rem 0 0.1rem;
+  color: var(--text-primary);
+}
+
+.md-content .md-list {
+  margin: 0.25rem 0;
+  padding-right: 1.4rem;
+  padding-left: 0;
+  direction: rtl;
+}
+
+.md-content ol.md-list {
+  list-style-type: decimal;
+}
+
+.md-content ul.md-list {
+  list-style-type: disc;
+}
+
+.md-content .md-list li {
+  margin-bottom: 0.2rem;
+  line-height: 1.65;
+  padding-right: 0.2rem;
+}
+
+.md-content strong {
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
 /* Recording state */
 .btn-record.recording {
   background: rgba(239, 68, 68, 0.12);
@@ -1263,20 +1388,42 @@
 
   /* Input area */
   .chat-input-area {
-    gap: 0.4rem;
-    padding: 0.5rem 0.6rem;
-    padding-bottom: calc(0.5rem + env(safe-area-inset-bottom, 0px));
+    gap: 0.35rem;
+    padding: 0.4rem 0.5rem;
+    padding-bottom: calc(0.4rem + env(safe-area-inset-bottom, 0px));
+  }
+
+  .chat-input-row {
+    gap: 0.35rem;
   }
 
   .chat-input {
     font-size: 16px;
-    padding: 0.6rem 0.8rem;
-    min-height: 44px;
+    padding: 0.5rem 0.7rem;
+    min-height: 40px;
   }
 
   .send-button {
-    width: 44px;
-    height: 44px;
+    width: 40px;
+    height: 40px;
+    font-size: 1rem;
+  }
+
+  .input-action-btn {
+    width: 40px;
+    height: 40px;
+    font-size: 1rem;
+  }
+
+  .more-menu-dropdown {
+    left: auto;
+    right: 0;
+    min-width: 170px;
+  }
+
+  .topic-tag {
+    font-size: 0.75rem;
+    padding: 0.2rem 0.5rem;
   }
 }
 

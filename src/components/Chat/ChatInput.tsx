@@ -28,8 +28,10 @@ export const ChatInput: React.FC<ChatInputProps> = ({
   const [isRecording, setIsRecording] = useState(false);
   const [isTranscribing, setIsTranscribing] = useState(false);
   const [isEnhancing, setIsEnhancing] = useState(false);
+  const [showMoreMenu, setShowMoreMenu] = useState(false);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const mentionListRef = useRef<HTMLDivElement>(null);
+  const moreMenuRef = useRef<HTMLDivElement>(null);
   const mediaRecorderRef = useRef<MediaRecorder | null>(null);
   const audioChunksRef = useRef<Blob[]>([]);
 
@@ -215,6 +217,19 @@ export const ChatInput: React.FC<ChatInputProps> = ({
     }
   }, [input, isEnhancing, selectedTopic]);
 
+  // ── Close more-menu on outside click ─────────────────────────
+
+  useEffect(() => {
+    if (!showMoreMenu) return;
+    const handleClickOutside = (e: MouseEvent) => {
+      if (moreMenuRef.current && !moreMenuRef.current.contains(e.target as Node)) {
+        setShowMoreMenu(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, [showMoreMenu]);
+
   return (
     <div className="chat-input-area">
       {/* Selected topic tag */}
@@ -275,23 +290,42 @@ export const ChatInput: React.FC<ChatInputProps> = ({
         />
 
         <div className="chat-input-buttons">
-          <button
-            className={`input-action-btn btn-record ${isRecording ? "recording" : ""}`}
-            onClick={toggleRecording}
-            disabled={disabled || isTranscribing || isEnhancing}
-            title={isRecording ? "עצור הקלטה" : "הקלט הודעה קולית"}
-          >
-            {isTranscribing ? "⏳" : isRecording ? "⏹️" : "🎤"}
-          </button>
+          {/* 3-dot menu for record & enhance */}
+          <div className="more-menu-wrapper" ref={moreMenuRef}>
+            <button
+              className="input-action-btn btn-more"
+              onClick={() => setShowMoreMenu((p) => !p)}
+              disabled={disabled}
+              title="אפשרויות נוספות"
+            >
+              ⋮
+            </button>
 
-          <button
-            className={`input-action-btn btn-enhance ${isEnhancing ? "enhancing" : ""}`}
-            onClick={handleEnhancePrompt}
-            disabled={disabled || !input.trim() || isEnhancing || isTranscribing}
-            title="שפר שאלה בעזרת AI"
-          >
-            {isEnhancing ? "⏳" : "✨"}
-          </button>
+            {showMoreMenu && (
+              <div className="more-menu-dropdown">
+                <button
+                  className={`more-menu-item ${isRecording ? "recording" : ""}`}
+                  onClick={() => { toggleRecording(); if (!isRecording) setShowMoreMenu(false); }}
+                  disabled={disabled || isTranscribing || isEnhancing}
+                >
+                  <span className="more-menu-icon">
+                    {isTranscribing ? "⏳" : isRecording ? "⏹️" : "🎤"}
+                  </span>
+                  <span>
+                    {isTranscribing ? "ממלל..." : isRecording ? "עצור הקלטה" : "הקלט קולית"}
+                  </span>
+                </button>
+                <button
+                  className="more-menu-item"
+                  onClick={() => { handleEnhancePrompt(); setShowMoreMenu(false); }}
+                  disabled={disabled || !input.trim() || isEnhancing || isTranscribing}
+                >
+                  <span className="more-menu-icon">{isEnhancing ? "⏳" : "✨"}</span>
+                  <span>{isEnhancing ? "משפר..." : "שפר שאלה עם AI"}</span>
+                </button>
+              </div>
+            )}
+          </div>
 
           <button
             className="send-button"
