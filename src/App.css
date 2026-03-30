@@ -1429,6 +1429,82 @@
     font-size: 0.75rem;
     padding: 0.2rem 0.5rem;
   }
+
+  /* ── Manual Search — mobile sidebar ── */
+  .manual-search {
+    padding-bottom: 0.75rem;
+  }
+
+  .manual-search h3 {
+    font-size: 0.88rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .manual-input {
+    font-size: 16px; /* prevents iOS zoom */
+    padding: 0.6rem 0.7rem;
+    border-radius: var(--radius-sm);
+  }
+
+  .manual-search-btn {
+    padding: 0.65rem;
+    font-size: 0.88rem;
+    border-radius: var(--radius-sm);
+    min-height: 42px;
+  }
+
+  .manual-search-hint {
+    font-size: 0.68rem;
+  }
+
+  /* ── ManualsLib overlay — full screen on mobile ── */
+  .manualslib-overlay {
+    padding: 0;
+  }
+
+  .manualslib-modal {
+    width: 100vw;
+    height: 100vh;
+    height: 100dvh;
+    max-width: none;
+    border-radius: 0;
+  }
+
+  .manualslib-header {
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    padding: 0.5rem 0.65rem;
+    padding-top: calc(0.5rem + env(safe-area-inset-top, 0px));
+  }
+
+  .manualslib-header-right {
+    gap: 0.5rem;
+  }
+
+  .manualslib-close-btn {
+    width: 36px;
+    height: 36px;
+    font-size: 1.1rem;
+  }
+
+  .manualslib-title {
+    font-size: 0.88rem;
+  }
+
+  .manualslib-translated {
+    font-size: 0.65rem;
+  }
+
+  .manualslib-external-btn {
+    font-size: 0.75rem;
+    padding: 0.35rem 0.65rem;
+  }
+
+  .manualslib-info-bar {
+    font-size: 0.72rem;
+    padding: 0.4rem 0.65rem;
+    line-height: 1.4;
+  }
 }
 
 /* Tiny phones (< 380px) */
