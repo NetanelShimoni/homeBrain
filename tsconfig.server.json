@@ -10,7 +10,9 @@
     "rootDir": "./server",
     "types": ["node"],
     "verbatimModuleSyntax": false,
-    "noEmit": true
+    "noEmit": false,
+    "declaration": false,
+    "sourceMap": false
   },
   "include": ["server/**/*.ts"]
 }
