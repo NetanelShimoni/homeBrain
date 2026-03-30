@@ -29,7 +29,12 @@ app.use("/api/documents", documentRoutes);
 app.use("/api/ai", aiRoutes);
 app.use("/api/manuals", manualRoutes);
 
-// Health check
+// Simple health check (for Render / uptime monitors)
+app.get("/healthz", (_req, res) => {
+  res.status(200).send("OK");
+});
+
+// Detailed health check
 app.get("/api/health", (_req, res) => {
   res.json({
     status: "ok",
